@@ -20,6 +20,7 @@
 				/>
 				<SharedSidebarMenu @close="open = false" />
 				<SharedColorModeToggle class="absolute right-20 top-4" />
+				<SharedLanguageToggle class="mt-10" />
 			</div>
 		</div>
 		<div
