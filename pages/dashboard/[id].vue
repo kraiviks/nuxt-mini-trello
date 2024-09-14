@@ -25,5 +25,9 @@ const project = ref();
 onMounted(() => {
 	const selectProject = projectStore.getProject(params.id as string);
 	project.value = selectProject;
+
+	useHead({
+		title: `${project?.value?.name} Nuxt-Mini-Trello`,
+	});
 });
 </script>

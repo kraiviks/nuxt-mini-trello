@@ -36,6 +36,10 @@
 </template>
 
 <script setup lang="ts">
+useHead({
+	title: 'Projects | Nuxt-Mini-Trello',
+});
+
 const newProjectName = ref('');
 const dashboardStore = useProjectsStore();
 
