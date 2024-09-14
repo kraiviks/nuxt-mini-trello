@@ -27,7 +27,7 @@ onMounted(() => {
 	project.value = selectProject;
 
 	useHead({
-		title: `${project?.value?.name} Nuxt-Mini-Trello`,
+		title: `${project?.value?.name} | Nuxt-Mini-Trello`,
 	});
 });
 </script>
