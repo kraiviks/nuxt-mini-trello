@@ -10,6 +10,7 @@ export default defineNuxtConfig({
 		'@pinia/nuxt',
 		'pinia-plugin-persistedstate/nuxt',
 		'@nuxtjs/i18n',
+		'@formkit/auto-animate',
 	],
 	colorMode: {
 		classSuffix: '',
