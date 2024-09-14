@@ -16,17 +16,24 @@ This is a Nuxt.js 3.13.0 project designed with modern web development practices.
 ## Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/kraiviks/nuxt-mini-trello.git
    cd nuxt-mini-trello
 
+   ```
+
 2. Install the dependencies:
-    ```bash
-    npm install
+
+   ```bash
+   npm install
+
+   ```
 
 3. Start the development server:
-    ```bash
-    npm run dev
+   ```bash
+   npm run dev
+   ```
 
 ## Scripts
 
@@ -49,6 +56,7 @@ This is a Nuxt.js 3.13.0 project designed with modern web development practices.
 - **tailwind-merge:** Utility for merging TailwindCSS classes.
 - **tailwindcss-animate:** Animation utilities for TailwindCSS.
 - **vuedraggable:** Drag-and-drop support for Vue.js.
+- **@formkit/auto-animate:** Auto animate utility for FormKit.
 
 ## Dev Dependencies
 
