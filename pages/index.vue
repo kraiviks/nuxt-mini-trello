@@ -22,7 +22,7 @@
 			</button>
 		</form>
 
-		<ul>
+		<ul v-auto-animate>
 			<SharedProjectItem
 				v-for="project in dashboardStore.projects"
 				:key="project.id"
