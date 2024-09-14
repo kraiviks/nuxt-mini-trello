@@ -27,10 +27,7 @@
 		</draggable>
 
 		<div class="flex justify-end mt-5">
-			<SharedModal
-				:title="$t('ADD_TASK')"
-				:showCloseButton="errors.description && errors.name"
-			>
+			<SharedModal :title="$t('ADD_TASK')" :locked="isLocked">
 				<template #trigger>
 					<Icon
 						icon="mdi:add"
@@ -98,6 +95,10 @@ const errors = ref({
 	description: false,
 });
 
+const isLocked = computed(() => {
+	return errors.value.name || errors.value.description;
+})
+
 const task = ref({
 	name: '',
 	description: '',
@@ -109,10 +110,14 @@ const addTask = () => {
 	if (!task.value.name) {
 		errors.value.name = true;
 		return;
+	} else {
+		errors.value.name = false;
 	}
 	if (!task.value.description) {
 		errors.value.description = true;
 		return;
+	} else {
+		errors.value.description = false;
 	}
 	projectStore.addTask(props.projectId, props.section.status, {
 		id: nanoid(),
@@ -129,11 +134,6 @@ const addTask = () => {
 		description: '',
 		performer: '',
 		priority: Priority.Low,
-	};
-
-	errors.value = {
-		name: false,
-		description: false,
 	};
 };
 

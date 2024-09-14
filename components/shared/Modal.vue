@@ -6,17 +6,23 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-	DialogClose,
 } from '@/components/ui/dialog';
-
-defineProps({
+const props = defineProps({
 	title: { type: String, default: '' },
-	showCloseButton: { type: Boolean, default: true },
+	locked: { type: Boolean, default: false },
 });
+
+const isOpen = ref(false);
+
+const closeDialog = () => {
+	if (!props.locked) {
+		isOpen.value = false;
+	}
+};
 </script>
 
 <template>
-	<Dialog>
+	<Dialog v-model:open="isOpen">
 		<DialogTrigger class="w-full flex justify-end">
 			<slot name="trigger" />
 		</DialogTrigger>
@@ -33,12 +39,11 @@ defineProps({
 				<slot name="content" />
 			</div>
 
-			<DialogFooter>
+			<DialogFooter class="flex-col items-center gap-2">
 				<slot name="footer" />
-				<DialogClose v-if="showCloseButton" asChild>
+				<div @click="closeDialog">
 					<slot name="triggerButton" />
-				</DialogClose>
-				<slot v-else name="triggerButton" />
+				</div>
 			</DialogFooter>
 		</DialogContent>
 	</Dialog>
