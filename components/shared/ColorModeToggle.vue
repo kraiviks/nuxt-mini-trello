@@ -10,9 +10,6 @@
 
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
-import { useStorage } from '@vueuse/core';
-import { onMounted, watch } from 'vue';
-
 const colorMode = useColorMode();
 
 const isDark = computed({
