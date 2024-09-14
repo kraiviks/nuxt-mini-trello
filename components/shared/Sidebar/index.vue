@@ -18,7 +18,7 @@
 					icon="mdi:close"
 					@click="open = false"
 				/>
-				<SharedSidebarMenu @closed="open = false" />
+				<SharedSidebarMenu @close="open = false" />
 				<SharedColorModeToggle class="absolute right-20 top-4" />
 			</div>
 		</div>
