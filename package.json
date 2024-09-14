@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@formkit/auto-animate": "^0.8.2",
     "@nuxtjs/i18n": "^8.5.3",
     "@pinia/nuxt": "^0.5.4",
     "@vueuse/core": "^11.0.3",
