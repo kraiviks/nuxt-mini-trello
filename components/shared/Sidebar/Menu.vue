@@ -11,12 +11,12 @@
 				<NuxtLink
 					v-for="item in items"
 					:key="item.title"
-					:to="item.href"
+					:to="localePath(item.href)"
 					@click="emit('close')"
 					class="flex items-center gap-2 px-2 py-1 transition rounded cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-600"
 				>
 					<Icon :icon="item.icon" class="h-6 w-6" />
-					<span>{{ item.title }}</span>
+					<span>{{ $t(item.title) }}</span>
 				</NuxtLink>
 			</div>
 		</div>
@@ -25,11 +25,11 @@
 
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue';
-
+const localePath = useLocalePath();
 const emit = defineEmits(['close']);
 
 const items = ref([
-	{ title: 'Prjects', href: '/', icon: 'mdi:folder' },
-	{ title: 'Dashboard', href: '/dashboard', icon: 'mdi:view-dashboard' },
+	{ title: 'PROJECTS', href: '/', icon: 'mdi:folder' },
+	{ title: 'DASHBOARD', href: '/dashboard', icon: 'mdi:view-dashboard' },
 ]);
 </script>

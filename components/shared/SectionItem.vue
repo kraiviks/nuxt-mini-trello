@@ -27,7 +27,10 @@
 		</draggable>
 
 		<div class="flex justify-end mt-5">
-			<SharedModal title="Add task">
+			<SharedModal
+				:title="$t('ADD_TASK')"
+				:showCloseButton="errors.description && errors.name"
+			>
 				<template #trigger>
 					<Icon
 						icon="mdi:add"
@@ -36,27 +39,36 @@
 				</template>
 				<template #content>
 					<div class="flex flex-col gap-3">
-						<Input type="text" placeholder="Name" v-model="task.name" />
-						<Textarea v-model="task.description" placeholder="Description" />
+						<Input
+							type="text"
+							:placeholder="`${$t('NAME')}*`"
+							v-model="task.name"
+							:class="errors.name && 'border-red-500'"
+						/>
+						<Textarea
+							v-model="task.description"
+							:placeholder="`${$t('DESCRIPTION')}*`"
+							:class="errors.description && 'border-red-500'"
+						/>
 						<SharedSelect
-							placeholder="Select a responsible person"
+							:placeholder="$t('SELECT_RESPONSIBLE_PERSON')"
 							:options="responsiblePersonList"
 							@onChange="selectResponsiblePerson"
 						/>
 						<SharedSelect
-							placeholder="Select a performer"
+							:placeholder="$t('SELECT_PERFORMER')"
 							:options="performerList"
 							@onChange="selectPerformer"
 						/>
 						<SharedSelect
-							placeholder="Select a priority"
+							:placeholder="$t('SELECT_PRIORITY')"
 							:options="PriorityOptions"
 							@onChange="selectPriority"
 						/>
 					</div>
 				</template>
 				<template #triggerButton>
-					<Button variant="outline" @click="addTask"> Add </Button>
+					<Button variant="outline" @click="addTask"> {{ $t('ADD') }} </Button>
 				</template>
 			</SharedModal>
 		</div>
@@ -81,6 +93,11 @@ const props = defineProps({
 
 const projectStore = useProjectsStore();
 
+const errors = ref({
+	name: false,
+	description: false,
+});
+
 const task = ref({
 	name: '',
 	description: '',
@@ -89,6 +106,14 @@ const task = ref({
 });
 
 const addTask = () => {
+	if (!task.value.name) {
+		errors.value.name = true;
+		return;
+	}
+	if (!task.value.description) {
+		errors.value.description = true;
+		return;
+	}
 	projectStore.addTask(props.projectId, props.section.status, {
 		id: nanoid(),
 		name: task.value.name,
@@ -104,6 +129,11 @@ const addTask = () => {
 		description: '',
 		performer: '',
 		priority: Priority.Low,
+	};
+
+	errors.value = {
+		name: false,
+		description: false,
 	};
 };
 

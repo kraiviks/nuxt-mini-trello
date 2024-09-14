@@ -9,6 +9,7 @@ export default defineNuxtConfig({
 		'@vueuse/nuxt',
 		'@pinia/nuxt',
 		'pinia-plugin-persistedstate/nuxt',
+		'@nuxtjs/i18n',
 	],
 	colorMode: {
 		classSuffix: '',
@@ -23,5 +24,15 @@ export default defineNuxtConfig({
 		 * @default "./components/ui"
 		 */
 		componentDir: './components/ui',
+	},
+	i18n: {
+		locales: [
+			{ code: 'en', iso: 'en-US', file: 'en.json' },
+			{ code: 'uk', iso: 'uk-UA', file: 'uk.json' },
+		],
+		lazy: false,
+		langDir: 'locales/',
+		defaultLocale: 'en',
+		strategy: 'prefix_except_default',
 	},
 });

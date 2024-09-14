@@ -26,6 +26,10 @@
 			class="hidden lg:flex w-[250px] h-screen flex-col justify-between border-r"
 		>
 			<SharedSidebarMenu />
+			<div class="flex items-center justify-between ga-3 p-3">
+				<SharedColorModeToggle />
+				<SharedLanguageToggle />
+			</div>
 		</div>
 	</div>
 </template>

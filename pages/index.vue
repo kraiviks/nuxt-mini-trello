@@ -2,10 +2,7 @@
 	<header
 		class="bg-slate-300 dark:bg-slate-600 px-4 py-2 flex items-center justify-between rounded-sm"
 	>
-		<h2 class="text-lg font-bold">Project Management</h2>
-		<div class="flex gap-2 items-center">
-			<SharedColorModeToggle />
-		</div>
+		<h2 class="text-lg font-bold">{{ $t('PROJECT_HEADER_TITLE') }}</h2>
 	</header>
 	<main class="mt-3">
 		<!-- Form to Add New Project -->
@@ -13,7 +10,7 @@
 			<Input
 				v-model="newProjectName"
 				type="text"
-				placeholder="Enter project name"
+				:placeholder="$t('ENTER_PROJECT_NAME')"
 				class="border border-slate-300 p-2 rounded w-full dark:bg-slate-800 dark:text-white"
 				required
 			/>
@@ -21,7 +18,7 @@
 				type="submit"
 				class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-nowrap"
 			>
-				Add Project
+				{{ $t('ADD_PROJECT') }}
 			</button>
 		</form>
 

@@ -6,10 +6,12 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
+	DialogClose,
 } from '@/components/ui/dialog';
 
 defineProps({
 	title: { type: String, default: '' },
+	showCloseButton: { type: Boolean, default: true },
 });
 </script>
 
@@ -20,7 +22,7 @@ defineProps({
 		</DialogTrigger>
 		<DialogContent>
 			<DialogHeader>
-				<DialogTitle>{{ title }}</DialogTitle>
+				<DialogTitle>{{ $t(title) }}:</DialogTitle>
 				<slot name="header" />
 			</DialogHeader>
 			<DialogDescription>
@@ -33,9 +35,10 @@ defineProps({
 
 			<DialogFooter>
 				<slot name="footer" />
-				<DialogTrigger>
+				<DialogClose v-if="showCloseButton" asChild>
 					<slot name="triggerButton" />
-				</DialogTrigger>
+				</DialogClose>
+				<slot v-else name="triggerButton" />
 			</DialogFooter>
 		</DialogContent>
 	</Dialog>

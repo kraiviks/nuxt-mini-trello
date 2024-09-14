@@ -3,7 +3,7 @@
 		class="bg-slate-300 dark:bg-slate-300 py-1 px-2 text-black rounded cursor-pointer"
 		:data-id="task.id"
 	>
-		<SharedModal v-if="!editName" title="Details:">
+		<SharedModal v-if="!editName" title="DETAILS"">
 			<template #trigger>
 				<div class="flex items-center justify-between gap-2 w-full">
 					{{ task.name }}
@@ -17,11 +17,11 @@
 			<template #header>
 				<div class="flex flex-col gap-2 p-5 border mt-3">
 					<div class="flex items-center gap-1">
-						<p class="font-bold text-slate-500">Status:</p>
+						<p class="font-bold text-slate-500">{{ $t('STATUS') }}:</p>
 						<p>{{ task.status }}</p>
 					</div>
 					<div class="flex items-center gap-1">
-						<p class="font-bold text-slate-500">Performer:</p>
+						<p class="font-bold text-slate-500">{{ $t('PERFORMER') }}:</p>
 						<p v-if="task.performer && !detailsEdit">{{ task.performer }}</p>
 						<Icon
 							icon="mdi:add"
@@ -31,14 +31,16 @@
 						/>
 						<SharedSelect
 							v-if="detailsEdit"
-							placeholder="Select a performer"
+							:placeholder="$t('SELECT_PERFORMER')"
 							:options="performerList"
 							@onChange="selectPerformer"
 							:value="taskData.performer"
 						/>
 					</div>
 					<div class="flex items-center gap-1">
-						<p class="font-bold text-slate-500">Responsible person:</p>
+						<p class="font-bold text-slate-500">
+							{{ $t('RESPONSIBLE_PERSON') }}:
+						</p>
 						<p v-if="task.responsiblePerson && !detailsEdit">
 							{{ task.responsiblePerson }}
 						</p>
@@ -50,7 +52,7 @@
 						/>
 						<SharedSelect
 							v-if="detailsEdit"
-							placeholder="Select a performer"
+							:placeholder="$t('SELECT_RESPONSIBLE_PERSON')"
 							:options="responsiblePersonList"
 							@onChange="selectResponsiblePerson"
 							:value="taskData.responsiblePerson"
@@ -61,19 +63,19 @@
 			<template #content>
 				<ul class="flex flex-col gap-2 max-w-[450px]">
 					<li class="flex items-center gap-2">
-						<p class="font-bold text-slate-500">Name:</p>
+						<p class="font-bold text-slate-500">{{ $t('NAME') }}:</p>
 						<p class="text-lg" v-if="!detailsEdit">{{ task.name }}</p>
 						<Input v-else v-model="taskData.name" />
 					</li>
 					<li class="flex items-center gap-2 flex-wrap">
-						<p class="font-bold text-slate-500">Description:</p>
+						<p class="font-bold text-slate-500">{{ $t('DESCRIPTION') }}:</p>
 						<div class="text-lg break-words max-w-full" v-if="!detailsEdit">
 							{{ task.description }}
 						</div>
 						<Textarea v-else v-model="taskData.description" />
 					</li>
 					<li class="flex items-center gap-2">
-						<p class="font-bold text-slate-500">Priority:</p>
+						<p class="font-bold text-slate-500">{{ $t('PRIORITY') }}:</p>
 						<div
 							v-if="!detailsEdit"
 							class="w-2 h-2 rounded-full p-2"
@@ -85,7 +87,7 @@
 						/>
 						<SharedSelect
 							v-else
-							placeholder="Select a priority"
+							:placeholder="$t('SELECT_PRIORITY')"
 							:options="PriorityOptions"
 							@onChange="selectPriority"
 							:value="taskData.priority"
@@ -95,13 +97,15 @@
 			</template>
 			<template #footer>
 				<div class="flex justify-between w-full">
-					<Button variant="destructive" @click="deleteTask"> Remove </Button>
+					<Button variant="destructive" @click="deleteTask">
+						{{ $t('REMOVE') }}
+					</Button>
 					<Button
 						v-if="!detailsEdit"
 						variant="outline"
 						@click="detailsEdit = true"
 					>
-						Edit
+						{{ $t('EDIT') }}
 					</Button>
 					<Button
 						v-else
@@ -113,12 +117,14 @@
 							}
 						"
 					>
-						Save
+						{{ $t('SAVE') }}
 					</Button>
 				</div>
 			</template>
 			<template #triggerButton>
-				<Button variant="outline" @click="editName = false"> Close </Button>
+				<Button variant="outline" @click="editName = false">
+					{{ $t('CLOSE') }}
+				</Button>
 			</template>
 		</SharedModal>
 		<div class="flex items-center justify-between gap-2" v-if="editName">

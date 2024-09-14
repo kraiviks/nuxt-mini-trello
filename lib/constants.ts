@@ -5,4 +5,8 @@ export const performerList = [
 	'John Smith',
 	'Jane Smith',
 ];
-export const responsiblePersonList = ['Oliver Brown', 'Eva White', 'Leonard Black']
+export const responsiblePersonList = [
+	'Oliver Brown',
+	'Eva White',
+	'Leonard Black',
+];

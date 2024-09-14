@@ -4,7 +4,7 @@
 		class="flex justify-between items-center border-b border-slate-300 py-2 cursor-pointer w-full lg:max-w-sm"
 	>
 		<NuxtLink
-			:to="`/dashboard/${project.id}`"
+			:to="localePath(`/dashboard/${project.id}`)"
 			v-if="!editProjectName"
 			class="w-full"
 		>
@@ -43,6 +43,7 @@
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue';
 const editProjectName = ref(false);
+const localePath = useLocalePath()
 
 const dashboardStore = useProjectsStore();
 defineProps({
