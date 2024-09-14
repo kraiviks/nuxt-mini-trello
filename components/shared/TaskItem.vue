@@ -3,7 +3,7 @@
 		class="bg-slate-300 dark:bg-slate-300 py-1 px-2 text-black rounded cursor-pointer"
 		:data-id="task.id"
 	>
-		<SharedModal v-if="!editName" title="DETAILS"">
+		<SharedModal v-if="!editName" title="DETAILS">
 			<template #trigger>
 				<div class="flex items-center justify-between gap-2 w-full">
 					{{ task.name }}
