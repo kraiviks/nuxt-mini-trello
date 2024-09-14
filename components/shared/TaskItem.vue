@@ -1,0 +1,193 @@
+<template>
+	<li
+		class="bg-slate-300 dark:bg-slate-300 py-1 px-2 text-black rounded cursor-pointer"
+		:data-id="task.id"
+	>
+		<SharedModal v-if="!editName" title="Details:">
+			<template #trigger>
+				<div class="flex items-center justify-between gap-2 w-full">
+					{{ task.name }}
+					<Icon
+						icon="mdi:rename"
+						class="hover:scale-150 transition"
+						@click="editName = true"
+					/>
+				</div>
+			</template>
+			<template #header>
+				<div class="flex flex-col gap-2 p-5 border mt-3">
+					<div class="flex items-center gap-1">
+						<p class="font-bold text-slate-500">Status:</p>
+						<p>{{ task.status }}</p>
+					</div>
+					<div class="flex items-center gap-1">
+						<p class="font-bold text-slate-500">Performer:</p>
+						<p v-if="task.performer && !detailsEdit">{{ task.performer }}</p>
+						<Icon
+							icon="mdi:add"
+							class="cursor-pointer hover:scale-150 transition"
+							v-if="!task.performer && !detailsEdit"
+							@click="detailsEdit = true"
+						/>
+						<SharedSelect
+							v-if="detailsEdit"
+							placeholder="Select a performer"
+							:options="performerList"
+							@onChange="selectPerformer"
+							:value="taskData.performer"
+						/>
+					</div>
+					<div class="flex items-center gap-1">
+						<p class="font-bold text-slate-500">Responsible person:</p>
+						<p v-if="task.responsiblePerson && !detailsEdit">
+							{{ task.responsiblePerson }}
+						</p>
+						<Icon
+							icon="mdi:add"
+							class="cursor-pointer hover:scale-150 transition"
+							v-if="!task.responsiblePerson && !detailsEdit"
+							@click="detailsEdit = true"
+						/>
+						<SharedSelect
+							v-if="detailsEdit"
+							placeholder="Select a performer"
+							:options="responsiblePersonList"
+							@onChange="selectResponsiblePerson"
+							:value="taskData.responsiblePerson"
+						/>
+					</div>
+				</div>
+			</template>
+			<template #content>
+				<ul class="flex flex-col gap-2 max-w-[450px]">
+					<li class="flex items-center gap-2">
+						<p class="font-bold text-slate-500">Name:</p>
+						<p class="text-lg" v-if="!detailsEdit">{{ task.name }}</p>
+						<Input v-else v-model="taskData.name" />
+					</li>
+					<li class="flex items-center gap-2 flex-wrap">
+						<p class="font-bold text-slate-500">Description:</p>
+						<div class="text-lg break-words max-w-full" v-if="!detailsEdit">
+							{{ task.description }}
+						</div>
+						<Textarea v-else v-model="taskData.description" />
+					</li>
+					<li class="flex items-center gap-2">
+						<p class="font-bold text-slate-500">Priority:</p>
+						<div
+							v-if="!detailsEdit"
+							class="w-2 h-2 rounded-full p-2"
+							:class="{
+								'bg-blue-500': task.priority === Priority.Low,
+								'bg-yellow-500': task.priority === Priority.Medium,
+								'bg-red-500': task.priority === Priority.High,
+							}"
+						/>
+						<SharedSelect
+							v-else
+							placeholder="Select a priority"
+							:options="PriorityOptions"
+							@onChange="selectPriority"
+							:value="taskData.priority"
+						/>
+					</li>
+				</ul>
+			</template>
+			<template #footer>
+				<div class="flex justify-between w-full">
+					<Button variant="destructive" @click="deleteTask"> Remove </Button>
+					<Button
+						v-if="!detailsEdit"
+						variant="outline"
+						@click="detailsEdit = true"
+					>
+						Edit
+					</Button>
+					<Button
+						v-else
+						variant="outline"
+						@click="
+							() => {
+								detailsEdit = false;
+								saveTask();
+							}
+						"
+					>
+						Save
+					</Button>
+				</div>
+			</template>
+			<template #triggerButton>
+				<Button variant="outline" @click="editName = false"> Close </Button>
+			</template>
+		</SharedModal>
+		<div class="flex items-center justify-between gap-2" v-if="editName">
+			<Input
+				v-model="taskData.name"
+				type="text"
+				class="w-full h-6 dark:bg-white"
+			/>
+			<Icon
+				icon="mdi:content-save"
+				class="hover:scale-150 transition"
+				@click="saveTask"
+			/>
+		</div>
+	</li>
+</template>
+
+<script lang="ts" setup>
+import { Icon } from '@iconify/vue';
+import {
+	performerList,
+	PriorityOptions,
+	responsiblePersonList,
+} from '~/lib/constants';
+
+const props = defineProps({
+	projectId: { type: String, required: true },
+	task: { type: Object, required: true },
+	sectionStatus: { type: String, required: true },
+});
+
+const emit = defineEmits(['edit', 'delete']);
+
+const taskData = ref(props.task);
+
+const editName = ref<boolean>(false);
+const detailsEdit = ref<boolean>(false);
+
+const saveTask = () => {
+	emit('edit', {
+		projectId: props.projectId,
+		status: props.sectionStatus,
+		task: {
+			...taskData.value,
+			priority: taskData.value.priority || Priority.Low,
+		},
+	});
+	editName.value = false;
+};
+
+const deleteTask = () => {
+	emit('delete', {
+		projectId: props.projectId,
+		status: props.sectionStatus,
+		taskId: props.task.id,
+	});
+};
+
+const selectPerformer = (performer: string) => {
+	taskData.value.performer = performer;
+};
+
+const selectPriority = (priority: string) => {
+	taskData.value.priority = priority;
+};
+
+const selectResponsiblePerson = (responsiblePerson: string) => {
+	taskData.value.responsiblePerson = responsiblePerson;
+};
+</script>
+
+<style></style>
