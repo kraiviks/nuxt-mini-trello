@@ -16,7 +16,7 @@
 			/>
 			<button
 				type="submit"
-				class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-nowrap"
+				class="bg-slate-300 text-slate-800 dark:bg-slate-500 hover:bg-slate-500 hover:text-white dark:hover:bg-slate-700 dark:text-white font-bold py-2 px-4 rounded text-nowrap"
 			>
 				{{ $t('ADD_PROJECT') }}
 			</button>
