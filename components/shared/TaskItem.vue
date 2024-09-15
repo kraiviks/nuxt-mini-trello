@@ -7,7 +7,7 @@
 			<template #trigger>
 				<div
 					class="flex items-center justify-between gap-2 w-full py-3 px-4"
-					@click.native.stop="() => console.log(task.name)"
+					@touchstart.native.stop="() => console.log(task.name)"
 				>
 					{{ task.name }}
 					<Icon
