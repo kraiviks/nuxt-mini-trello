@@ -6,17 +6,17 @@
 		<NuxtLink
 			:to="localePath(`/dashboard/${project.id}`)"
 			v-if="!editProjectName"
-			class="w-full"
+			class="w-full h-7"
 		>
 			{{ project.name }}
 		</NuxtLink>
 		<div
-			class="flex items-center gap-3"
+			class="flex items-center gap-5"
 			:class="editProjectName ? 'w-full' : ''"
 		>
 			<Icon
 				icon="mdi:rename"
-				class="hover:scale-150 transition"
+				class="hover:scale-150 transition w-7 h-7"
 				v-if="!editProjectName"
 				@click="editProjectName = true"
 			/>
@@ -24,16 +24,16 @@
 				class="flex items-center justify-between gap-2 w-full"
 				v-if="editProjectName"
 			>
-				<Input v-model="project.name" type="text" class="h-6" />
+				<Input v-model="project.name" type="text" class="h-full" />
 				<Icon
 					icon="mdi:content-save"
-					class="hover:scale-150 transition"
+					class="hover:scale-150 transition w-7 h-7"
 					@click="editProjectName = false"
 				/>
 			</div>
 			<Icon
 				icon="mdi:delete"
-				class="hover:scale-150 transition"
+				class="hover:scale-150 hover:text-red-500 transition w-7 h-7"
 				@click="dashboardStore.deleteProject(project.id)"
 			/>
 		</div>
