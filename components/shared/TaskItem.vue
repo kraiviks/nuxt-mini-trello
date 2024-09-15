@@ -2,6 +2,7 @@
 	<li
 		class="bg-slate-300 dark:bg-slate-300 text-black rounded cursor-pointer"
 		:data-id="task.id"
+		@click.stop="() => console.log('Details:', task.name)"
 	>
 		<SharedModal v-if="!editName" title="DETAILS">
 			<template #trigger>
