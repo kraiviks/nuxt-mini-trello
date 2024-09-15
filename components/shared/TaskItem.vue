@@ -5,10 +5,7 @@
 	>
 		<SharedModal v-if="!editName" title="DETAILS">
 			<template #trigger>
-				<div
-					class="flex items-center justify-between gap-2 w-full py-3 px-4"
-					@touchstart.native.stop="() => console.log(task.name)"
-				>
+				<div class="flex items-center justify-between gap-2 w-full py-3 px-4">
 					{{ task.name }}
 					<Icon
 						icon="mdi:rename"
