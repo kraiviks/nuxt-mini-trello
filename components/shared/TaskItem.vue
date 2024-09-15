@@ -1,12 +1,19 @@
 <template>
 	<li
 		class="bg-slate-300 dark:bg-slate-300 text-black rounded cursor-pointer"
+		:class="{ 'drag-handle': windowSieze.width.value > 640 }"
 		:data-id="task.id"
 	>
 		<SharedModal v-if="!editName" title="DETAILS">
 			<template #trigger>
 				<div class="flex items-center justify-between gap-2 w-full py-3 px-4">
-					{{ task.name }}
+					<div class="flex items-center">
+						<div class="drag-handle cursor-move hidden max-sm:block">
+							<Icon icon="mdi:drag" class="h-6 w-6 transition" />
+						</div>
+						{{ task.name }}
+					</div>
+
 					<Icon
 						icon="mdi:rename"
 						class="h-6 w-6 hover:scale-150 transition"
@@ -156,12 +163,13 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['edit', 'delete']);
+const windowSieze = useWindowSize();
 
 const taskData = ref(props.task);
-
 const editName = ref<boolean>(false);
 const detailsEdit = ref<boolean>(false);
 
+console.log(windowSieze.width.value);
 const saveTask = () => {
 	emit('edit', {
 		projectId: props.projectId,

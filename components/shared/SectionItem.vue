@@ -13,6 +13,7 @@
 			@end="onEnd"
 			:data-status="section.status"
 			:animation="300"
+			:handle="'.drag-handle'"
 		>
 			<template #item="{ element }">
 				<SharedTaskItem
