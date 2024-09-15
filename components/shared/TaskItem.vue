@@ -1,15 +1,15 @@
 <template>
 	<li
-		class="bg-slate-300 dark:bg-slate-300 py-1 px-2 text-black rounded cursor-pointer"
+		class="bg-slate-300 dark:bg-slate-300 text-black rounded cursor-pointer"
 		:data-id="task.id"
 	>
 		<SharedModal v-if="!editName" title="DETAILS">
 			<template #trigger>
-				<div class="flex items-center justify-between gap-2 w-full">
+				<div class="flex items-center justify-between gap-2 w-full py-3 px-4">
 					{{ task.name }}
 					<Icon
 						icon="mdi:rename"
-						class="hover:scale-150 transition"
+						class="h-6 w-6 hover:scale-150 transition"
 						@click="editName = true"
 					/>
 				</div>
@@ -127,15 +127,14 @@
 				</Button>
 			</template>
 		</SharedModal>
-		<div class="flex items-center justify-between gap-2" v-if="editName">
-			<Input
-				v-model="taskData.name"
-				type="text"
-				class="w-full h-6 dark:bg-white"
-			/>
+		<div
+			class="flex items-center justify-between gap-2 py-1 px-4"
+			v-if="editName"
+		>
+			<Input v-model="taskData.name" type="text" class="w-full dark:bg-white" />
 			<Icon
 				icon="mdi:content-save"
-				class="hover:scale-150 transition"
+				class="hover:scale-150 h-6 w-6 transition cursor-pointer"
 				@click="saveTask"
 			/>
 		</div>
