@@ -2,11 +2,13 @@
 	<li
 		class="bg-slate-300 dark:bg-slate-300 text-black rounded cursor-pointer"
 		:data-id="task.id"
-		@click.stop="() => console.log('Details:', task.name)"
 	>
 		<SharedModal v-if="!editName" title="DETAILS">
 			<template #trigger>
-				<div class="flex items-center justify-between gap-2 w-full py-3 px-4">
+				<div
+					class="flex items-center justify-between gap-2 w-full py-3 px-4"
+					@click.native.stop="() => console.log(task.name)"
+				>
 					{{ task.name }}
 					<Icon
 						icon="mdi:rename"
@@ -136,7 +138,7 @@
 			<Icon
 				icon="mdi:content-save"
 				class="hover:scale-150 h-6 w-6 transition cursor-pointer"
-				@click="saveTask"
+				@click.native.stop="saveTask"
 			/>
 		</div>
 	</li>
