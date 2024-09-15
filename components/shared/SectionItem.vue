@@ -44,7 +44,7 @@
 						/>
 						<Textarea
 							v-model="task.description"
-							:placeholder="`${$t('DESCRIPTION')}*`"
+							:placeholder="`${$t('DESCRIPTION')}`"
 							:class="errors.description && 'border-red-500'"
 						/>
 						<SharedSelect
@@ -92,12 +92,11 @@ const projectStore = useProjectsStore();
 
 const errors = ref({
 	name: false,
-	description: false,
 });
 
 const isLocked = computed(() => {
-	return errors.value.name || errors.value.description;
-})
+	return errors.value.name;
+});
 
 const task = ref({
 	name: '',
@@ -112,12 +111,6 @@ const addTask = () => {
 		return;
 	} else {
 		errors.value.name = false;
-	}
-	if (!task.value.description) {
-		errors.value.description = true;
-		return;
-	} else {
-		errors.value.description = false;
 	}
 	projectStore.addTask(props.projectId, props.section.status, {
 		id: nanoid(),
