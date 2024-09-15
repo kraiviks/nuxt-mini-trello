@@ -20,7 +20,7 @@
 						<p class="font-bold text-slate-500">{{ $t('STATUS') }}:</p>
 						<p>{{ task.status }}</p>
 					</div>
-					<div class="flex items-center gap-1">
+					<div class="flex items-center gap-1 flex-wrap">
 						<p class="font-bold text-slate-500">{{ $t('PERFORMER') }}:</p>
 						<p v-if="task.performer && !detailsEdit">{{ task.performer }}</p>
 						<Icon
@@ -37,7 +37,7 @@
 							:value="taskData.performer"
 						/>
 					</div>
-					<div class="flex items-center gap-1">
+					<div class="flex items-center gap-1 flex-wrap">
 						<p class="font-bold text-slate-500">
 							{{ $t('RESPONSIBLE_PERSON') }}:
 						</p>
@@ -74,7 +74,7 @@
 						</div>
 						<Textarea v-else v-model="taskData.description" />
 					</li>
-					<li class="flex items-center gap-2">
+					<li class="flex items-center gap-2 flex-wrap">
 						<p class="font-bold text-slate-500">{{ $t('PRIORITY') }}:</p>
 						<div
 							v-if="!detailsEdit"
