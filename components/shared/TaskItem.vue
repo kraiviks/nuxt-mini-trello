@@ -1,7 +1,12 @@
 <template>
 	<li
 		class="bg-slate-300 dark:bg-slate-300 text-black rounded cursor-pointer"
-		:class="{ 'drag-handle': windowSieze.width.value > 640 }"
+		:class="{
+			'drag-handle': windowSieze.width.value > 640,
+			'border-l-4 border-blue-500': task.priority === Priority.Low,
+			'border-l-4 border-yellow-500': task.priority === Priority.Medium,
+			'border-l-4 border-red-500': task.priority === Priority.High,
+		}"
 		:data-id="task.id"
 	>
 		<SharedModal v-if="!editName" title="DETAILS">
