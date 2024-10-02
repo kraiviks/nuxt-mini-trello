@@ -8,7 +8,6 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 import { Icon } from '@iconify/vue';
-import { ref, watch, defineProps, defineEmits } from 'vue';
 
 const props = defineProps<{
 	placeholder: string;
