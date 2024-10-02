@@ -1,11 +1,10 @@
 <template>
-	<div class="max-w-screen-md mx-auto ">
 		<header
 			class="flex items-center justify-between px-4 py-2 rounded-sm bg-slate-300 dark:bg-slate-600"
 		>
 			<h2 class="text-lg font-bold">{{ $t('PROJECT_HEADER_TITLE') }}</h2>
 		</header>
-		<main class="mt-3">
+		<main class="max-w-screen-md mx-auto mt-3">
 			<!-- Form to Add New Project -->
 			<form @submit.prevent="handleSubmit" class="flex items-center gap-2 mb-4">
 				<Input
@@ -31,7 +30,6 @@
 				/>
 			</ul>
 		</main>
-	</div>
 </template>
 
 <script setup lang="ts">
