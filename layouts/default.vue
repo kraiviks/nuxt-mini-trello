@@ -1,7 +1,7 @@
 <template>
-	<div class="grid items-start lg:flex">
+	<div class="grid items-start h-screen overflow-hidden lg:flex">
 		<SharedSidebar />
-		<div class="p-4 w-full overflow-hidden">
+		<div class="w-full p-4 overflow-hidden">
 			<slot />
 		</div>
 	</div>

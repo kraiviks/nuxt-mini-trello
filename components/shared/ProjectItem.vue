@@ -6,7 +6,8 @@
 		<NuxtLink
 			:to="localePath(`/dashboard/${project.id}`)"
 			v-if="!editProjectName"
-			class="w-full h-7 animated-text"
+			class="w-full truncate h-7 animated-text"
+			:title="project.name"
 		>
 			{{ project.name }}
 		</NuxtLink>

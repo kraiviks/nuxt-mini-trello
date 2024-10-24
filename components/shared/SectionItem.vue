@@ -2,13 +2,14 @@
 	<section
 		class="bg-white dark:bg-slate-600 rounded-lg p-4 min-w-[300px] border h-max"
 	>
-		<h2 class="text-lg font-bold mb-3">{{ section.status }}</h2>
+		<h2 class="mb-3 text-lg font-bold">{{ section.status }}</h2>
 
 		<draggable
 			v-model="section.tasks"
 			:group="{ name: 'tasks', pull: true, put: true }"
 			tag="ul"
-			class="space-y-2"
+			class="space-y-2 overflow-auto min-h-14"
+			:style="{ maxHeight: sectionItemMaxHeight + 'px' }"
 			item-key="id"
 			@end="onEnd"
 			:data-status="section.status"
@@ -32,7 +33,7 @@
 				<template #trigger>
 					<Icon
 						icon="mdi:add"
-						class="cursor-pointer h-5 w-5 hover:scale-150 transition"
+						class="w-5 h-5 transition cursor-pointer hover:scale-150"
 					/>
 				</template>
 				<template #content>
@@ -87,6 +88,13 @@ import {
 const props = defineProps({
 	section: Object,
 	projectId: String,
+});
+const haederRef = inject('headerRef');
+
+const windowHeight = useWindowSize().height;
+
+const sectionItemMaxHeight = computed(() => {
+	return windowHeight.value - haederRef.value.offsetHeight - 150;
 });
 
 const projectStore = useProjectsStore();
