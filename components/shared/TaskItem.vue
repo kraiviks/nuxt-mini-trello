@@ -82,7 +82,7 @@
 					<li class="flex items-center gap-2">
 						<p class="font-bold text-slate-500">{{ $t('NAME') }}:</p>
 						<p
-							class="text-lg max-w-[400px] overflow-auto px-3"
+							class="text-lg max-w-[400px] overflow-auto px-3 text-nowrap"
 							v-if="!detailsEdit"
 							:title="task.name"
 						>
